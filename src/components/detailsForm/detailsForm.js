@@ -13,10 +13,10 @@ const deatils = React.memo((props) => {
 
 
     //error
-    const [enterFirstNameIsValid, setEnteredFirstNameIsValid] = useState(false);
-    const [enterLastNameIsValid, setEnteredLastNameIsValid] = useState(false);
-    const [enterEmailIsValid, setEnteredEmailIsValid] = useState(false);
-    const [entertextIsValid, setEnteredTextIsValid] = useState(false);
+    const [enterFirstNameIsValid, setEnteredFirstNameIsValid] = useState(true);
+    const [enterLastNameIsValid, setEnteredLastNameIsValid] = useState(true);
+    const [enterEmailIsValid, setEnteredEmailIsValid] = useState(true);
+    const [entertextIsValid, setEnteredTextIsValid] = useState(true);
 
 
     const submitHandler = (event) => {
@@ -70,13 +70,18 @@ const deatils = React.memo((props) => {
         firstNameRef.current.value = '';
     };
 
+    const firstNameInputClasses = enterFirstNameIsValid ? 'form-control' : 'form-control invalid';
+    const lastNameInputClasses = enterLastNameIsValid ? 'form-control' : 'form-control invalid';
+    const emaiInputClasses = enterEmailIsValid ? 'form-control' : 'form-control invalid';
+    const commentInputClasses = entertextIsValid ? 'form-control' : 'form-control invalid';
+
     return (
         <section className="ingredient-form">
             <Card>
                 <form onSubmit={submitHandler}>
                     <h1>Contact Us</h1>
 
-                    <div className="form-control">
+                    <div className={firstNameInputClasses}>
                         <label htmlFor="fn">FullName</label>
 
                         <input
@@ -91,7 +96,7 @@ const deatils = React.memo((props) => {
                         {!enterFirstNameIsValid && <p className="error-text">FirstName not be empty</p>}
                     </div>
 
-                    <div className="form-control">
+                    <div className={lastNameInputClasses}>
                         <label htmlFor="in">LastName</label>
                         <input
                             type="text"
@@ -104,7 +109,7 @@ const deatils = React.memo((props) => {
                         {!enterLastNameIsValid && <p className="error-text">lastName not be empty</p>}
                     </div>
 
-                    <div className="form-control">
+                    <div className={emaiInputClasses}>
                         <label htmlFor="email">Email</label>
                         <input
                             type="email"
@@ -117,7 +122,7 @@ const deatils = React.memo((props) => {
                         {!enterEmailIsValid && <p className="error-text">Email not be empty</p>}
                     </div>
 
-                    <div className="form-control">
+                    <div className={commentInputClasses}>
                         <label htmlFor="area">Leaave us a few words</label>
                         <textarea
                             type="text"
