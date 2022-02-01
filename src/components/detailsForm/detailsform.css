@@ -1,0 +1,30 @@
+.ingredient-form {
+  width: 30rem;
+  margin: 2rem auto;
+  max-width: 80%;
+}
+.form-control label,
+.form-control input {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  font: inherit;
+}
+h1 {
+  text-align: center;
+}
+textarea {
+  width: 100%;
+}
+button {
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  width: 50%;
+  margin-top: 10px;
+}
+.formactions {
+  text-align: center;
+  font: inherit;
+}
