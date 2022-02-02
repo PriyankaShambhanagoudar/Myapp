@@ -1,6 +1,9 @@
+//using useState hook
+
 import React, { useState } from "react";
 import "./detailsform.css";
 import Card from "../ul/card";
+
 
 const deatils = React.memo((props) => {
     //useRef
@@ -10,58 +13,36 @@ const deatils = React.memo((props) => {
 
     //useStae
     const [enterFirstName, setEnteredFirstName] = useState("");
-    const [enterLastName, setEnteredLastName] = useState("");
-    const [enterEmail, setEnteredEmail] = useState("");
-    const [entertext, setEnteredText] = useState("");
-
-    //input touched
     const [enterFirstNameTouched, setEnteredFirstNameTouched] = useState(false);
-    const [enterLastNameTouched, setEnteredLastNameTouched] = useState(false);
-    const [enterEmailTouched, setEnteredEmailTouched] = useState(false);
-    const [entertextTouched, setEnteredTextTouched] = useState(false);
-
     const enterFirstNameIsValid = enterFirstName.trim() !== "";
-    const enterLastNameIsValid = enterLastName.trim() !== "";
-    const enterEmailIsValid = enterEmail.includes('@');
-    const entertextIsValid = entertext.trim() !== "";
-
     const enterFirstNameIsInValid =
         !enterFirstNameIsValid && enterFirstNameTouched;
+
+    const [enterLastName, setEnteredLastName] = useState("");
+    const [enterLastNameTouched, setEnteredLastNameTouched] = useState(false);
+    const enterLastNameIsValid = enterLastName.trim() !== "";
     const enterLastNameIsInValid = !enterLastNameIsValid && enterLastNameTouched;
+
+    const [enterEmail, setEnteredEmail] = useState("");
+    const [enterEmailTouched, setEnteredEmailTouched] = useState(false);
+    const enterEmailIsValid = enterEmail.includes("@");
     const enterEmailIsInValid = !enterEmailIsValid && enterEmailTouched;
+
+    const [entertext, setEnteredText] = useState("");
+    const [entertextTouched, setEnteredTextTouched] = useState(false);
+    const entertextIsValid = entertext.trim() !== "";
     const entertextIIsInValid = !entertextIsValid && entertextTouched;
 
     let formIsValid = false;
 
-    if (enterFirstNameIsValid && enterLastNameIsValid && enterEmailIsValid && entertextIsValid) {
+    if (
+        enterFirstNameIsValid &&
+        enterLastNameIsValid &&
+        enterEmailIsValid &&
+        entertextIsValid
+    ) {
         formIsValid = true;
     }
-    const firstNameInputHandler = (event) => {
-        setEnteredFirstName(event.target.value);
-    };
-    const LastNameInputHandler = (event) => {
-        setEnteredLastName(event.target.value);
-    };
-    const emailInputHandler = (event) => {
-        setEnteredEmail(event.target.value);
-    };
-    const texrInputHandler = (event) => {
-        setEnteredText(event.target.value);
-    };
-
-    //blur
-    const firstNameInputBlur = (event) => {
-        setEnteredFirstNameTouched(true);
-    };
-    const lasttNameInputBlur = (event) => {
-        setEnteredLastNameTouched(true);
-    };
-    const EmailInputBlur = (event) => {
-        setEnteredEmailTouched(true);
-    };
-    const textInputBlur = (event) => {
-        setEnteredTextTouched(true);
-    };
 
     const submitHandler = (event) => {
         event.preventDefault();
@@ -87,22 +68,22 @@ const deatils = React.memo((props) => {
             return;
         }
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //reset 
+        //reset
         // const enterFirstNameValue = firstNameRef.current.value;
 
         //clearing input values useing state
         setEnteredFirstName("");
-        setEnteredLastName("");
-        setEnteredEmail("");
-        setEnteredText("");
-
         setEnteredFirstNameTouched(false);
-        setEnteredLastNameTouched(false);
-        setEnteredEmailTouched(false);
-        setEnteredTextTouched(false);
 
+        setEnteredLastName("");
+        setEnteredLastNameTouched(false);
+
+        setEnteredEmail("");
+        setEnteredEmailTouched(false);
+
+        setEnteredText("");
+        setEnteredTextTouched(false);
 
         //clearing  input values useing useRef (not good way)
         //  firstNameRef.current.value = '';
@@ -135,11 +116,13 @@ const deatils = React.memo((props) => {
                             type="text"
                             id="fn"
                             value={enterFirstName}
-                            onBlur={firstNameInputBlur}
-                            // onChange={(event) => {
-                            //     setEnteredFirstName(event.target.value);
-                            // }}
-                            onChange={firstNameInputHandler}
+                            onBlur={(event) => {
+                                setEnteredFirstNameTouched(true);
+                            }}
+                            onChange={(event) => {
+                                setEnteredFirstName(event.target.value);
+                            }}
+
                         />
                         {enterFirstNameIsInValid && (
                             <p className="error-text">FirstName not be empty</p>
@@ -152,11 +135,14 @@ const deatils = React.memo((props) => {
                             type="text"
                             id="in"
                             value={enterLastName}
-                            onBlur={lasttNameInputBlur}
-                            // onChange={(event) => {
-                            //     setEnteredLastName(event.target.value);
-                            // }}
-                            onChange={LastNameInputHandler}
+                            onBlur={(event) => {
+                                setEnteredLastNameTouched(true);
+                            }}
+
+                            onChange={(event) => {
+                                setEnteredLastName(event.target.value);
+                            }}
+
                         />
                         {enterLastNameIsInValid && (
                             <p className="error-text">lastName not be empty</p>
@@ -169,11 +155,13 @@ const deatils = React.memo((props) => {
                             type="email"
                             id="email"
                             value={enterEmail}
-                            onBlur={EmailInputBlur}
-                            // onChange={(event) => {
-                            //     setEnteredEmail(event.target.value);
-                            // }}
-                            onChange={emailInputHandler}
+                            onBlur={(event) => {
+                                setEnteredEmailTouched(true);
+                            }}
+                            onChange={(event) => {
+                                setEnteredEmail(event.target.value);
+                            }}
+
                         />
                         {enterEmailIsInValid && (
                             <p className="error-text">Please enter valid Email.</p>
@@ -186,11 +174,13 @@ const deatils = React.memo((props) => {
                             type="text"
                             id="area"
                             value={entertext}
-                            onBlur={textInputBlur}
-                            // onChange={(event) => {
-                            //     setEnteredText(event.target.value);
-                            // }}
-                            onChange={texrInputHandler}
+                            onBlur={(event) => {
+                                setEnteredTextTouched(true);
+                            }}
+                            onChange={(event) => {
+                                setEnteredText(event.target.value);
+                            }}
+
                         />
                         {entertextIIsInValid && (
                             <p className="error-text"> comment not be empty</p>
@@ -198,7 +188,10 @@ const deatils = React.memo((props) => {
                     </div>
 
                     <div className="formactions ">
-                        <button disabled={!formIsValid} type="submit"> Submit</button>
+                        <button disabled={!formIsValid} type="submit">
+                            {" "}
+                            Submit
+                        </button>
                     </div>
                 </form>
             </Card>
@@ -206,3 +199,6 @@ const deatils = React.memo((props) => {
     );
 });
 export default deatils;
+
+
+
