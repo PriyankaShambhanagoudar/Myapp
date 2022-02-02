@@ -6,6 +6,8 @@ const deatils = React.memo((props) => {
     //useRef
     //  const firstNameRef = useRef();
 
+
+
     //useStae
     const [enterFirstName, setEnteredFirstName] = useState("");
     const [enterLastName, setEnteredLastName] = useState("");
@@ -20,7 +22,7 @@ const deatils = React.memo((props) => {
 
     const enterFirstNameIsValid = enterFirstName.trim() !== "";
     const enterLastNameIsValid = enterLastName.trim() !== "";
-    const enterEmailIsValid = enterEmail.trim() !== "";
+    const enterEmailIsValid = enterEmail.includes('@');
     const entertextIsValid = entertext.trim() !== "";
 
     const enterFirstNameIsInValid =
@@ -29,6 +31,11 @@ const deatils = React.memo((props) => {
     const enterEmailIsInValid = !enterEmailIsValid && enterEmailTouched;
     const entertextIIsInValid = !entertextIsValid && entertextTouched;
 
+    let formIsValid = false;
+
+    if (enterFirstNameIsValid && enterLastNameIsValid && enterEmailIsValid && entertextIsValid) {
+        formIsValid = true;
+    }
     const firstNameInputHandler = (event) => {
         setEnteredFirstName(event.target.value);
     };
@@ -80,6 +87,9 @@ const deatils = React.memo((props) => {
             return;
         }
 
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //reset 
         // const enterFirstNameValue = firstNameRef.current.value;
 
         //clearing input values useing state
@@ -154,7 +164,7 @@ const deatils = React.memo((props) => {
                     </div>
 
                     <div className={emaiInputClasses}>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="email">E-mail</label>
                         <input
                             type="email"
                             id="email"
@@ -166,12 +176,12 @@ const deatils = React.memo((props) => {
                             onChange={emailInputHandler}
                         />
                         {enterEmailIsInValid && (
-                            <p className="error-text">Email not be empty</p>
+                            <p className="error-text">Please enter valid Email.</p>
                         )}
                     </div>
 
                     <div className={commentInputClasses}>
-                        <label htmlFor="area">Leaave us a few words</label>
+                        <label htmlFor="area">Leave us a few words</label>
                         <textarea
                             type="text"
                             id="area"
@@ -188,7 +198,7 @@ const deatils = React.memo((props) => {
                     </div>
 
                     <div className="formactions ">
-                        <button type="submit"> Submit</button>
+                        <button disabled={!formIsValid} type="submit"> Submit</button>
                     </div>
                 </form>
             </Card>
